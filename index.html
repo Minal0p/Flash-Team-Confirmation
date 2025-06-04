@@ -9,187 +9,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Light mode variables (default) */
         :root {
-            --body-bg: #ffffff;
-            --body-text: #333333;
-            --card-bg: #f9f9f9;
-            --card-border: #dddddd;
-            --card-shadow: rgba(0, 170, 255, 0.1);
-            --header-bg: #f9f9f9;
-            --content-bg: #ffffff;
-            --content-border: #eeeeee;
-            --h1-color: #222222;
-            --paragraph-color: #555555;
-            --link-paragraph-color: #666666;
-            --link-url-color: #007bff;
-            --button-bg: #007bff;
-            --button-text: #ffffff;
-            --button-hover-bg: #0056b3;
-            --footer-bg: #f1f1f1;
-            --footer-text: #555555;
-            --icon-color: #00f0ff; /* Bright cyan for light mode */
-            --icon-border: #007bff;
+            --conf-body-bg: #ffffff; /* Light mode body background */
+            --conf-body-text: #333333; /* Light mode general text */
+            --conf-card-bg: #f9f9f9;   /* Light mode card background */
+            --conf-card-border: #dddddd;
+            --conf-card-shadow: rgba(0, 123, 255, 0.1);
+            --conf-h1-color: #222222;
+            --conf-p-color: #555555;
+            --conf-icon-color: #007bff; /* Primary blue for light mode icon */
+            --conf-button-bg: #007bff;
+            --conf-button-text: #ffffff;
+            --conf-button-hover-bg: #0056b3;
         }
 
-        /* Dark mode variables */
         .dark {
-            --body-bg: #121212;
-            --body-text: #e0e0e0;
-            --card-bg: #1a1a1a;
-            --card-border: #00aaff40; /* Tailwind blue-500 with opacity */
-            --card-shadow: rgba(0, 170, 255, 0.2); /* Slightly more visible shadow for dark */
-            --header-bg: #1a1a1a;
-            --content-bg: #1f2937; /* Tailwind gray-800 */
-            --content-border: #374151; /* Tailwind gray-700 */
-            --h1-color: #ffffff;
-            --paragraph-color: #cccccc;
-            --link-paragraph-color: #bbbbbb;
-            --link-url-color: #60a5fa; /* Lighter blue for dark mode links */
-            --button-bg: #00aaff;
-            --button-text: #121212;
-            --button-hover-bg: #0088cc;
-            --footer-bg: #1f2937;
-            --footer-text: #bbbbbb;
-            --icon-color: #00f0ff; /* Bright cyan - can remain same or adjusted */
-            --icon-border: #00aaff;
+            --conf-body-bg: #121212;
+            --conf-body-text: #e0e0e0;
+            --conf-card-bg: #1a1a1a;
+            --conf-card-border: #00aaff40;
+            --conf-card-shadow: rgba(0, 170, 255, 0.15);
+            --conf-h1-color: #ffffff;
+            --conf-p-color: #cccccc;
+            --conf-icon-color: #00f0ff; /* Bright cyan for dark mode icon */
+            --conf-button-bg: #00aaff;
+            --conf-button-text: #121212;
+            --conf-button-hover-bg: #0088cc;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--body-bg);
             font-family: 'Cairo', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            color: var(--body-text);
+            background-color: var(--conf-body-bg);
+            color: var(--conf-body-text);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            margin: 0;
             padding: 20px;
             text-align: center;
             transition: background-color 0.3s, color 0.3s;
         }
-        .container-wrapper { /* Added wrapper for centering and padding */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .card { /* Renamed from .container to .card to avoid conflict with Tailwind */
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: var(--card-bg);
-            color: var(--body-text); /* Use body-text for card text for consistency */
+        .card {
+            background-color: var(--conf-card-bg);
+            padding: 40px 30px;
             border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 10px 30px var(--card-shadow);
+            box-shadow: 0 10px 30px var(--conf-card-shadow);
+            border: 1px solid var(--conf-card-border);
+            max-width: 500px;
+            width: 100%;
             transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-        .header {
-            padding: 30px 20px 20px 20px;
-            text-align: center;
-            background-color: var(--header-bg);
-             transition: background-color 0.3s;
-        }
-        .logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid var(--icon-border);
-            margin-bottom: 15px;
-            transition: border-color 0.3s;
-        }
-        .content {
-            padding: 30px 40px;
-            background-color: var(--content-bg);
-            border-top: 1px solid var(--content-border);
-            border-bottom: 1px solid var(--content-border);
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        .h1-styled { /* Renamed from .h1 to avoid conflict with h1 element selector */
-            font-size: 2rem;
-            color: var(--h1-color);
-            margin: 0 0 20px 0;
-            text-align: center;
-            font-weight: 700;
-            transition: color 0.3s;
-        }
-        .paragraph {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--paragraph-color);
-            margin: 0 0 25px 0;
-            text-align: center;
-            transition: color 0.3s;
-        }
-        .button-container {
-            text-align: center;
-            padding: 10px 0 30px 0;
-        }
-        .button {
-            background-color: var(--button-bg);
-            color: var(--button-text) !important; /* Kept important as in original */
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            display: inline-block;
-            font-size: 1rem;
-            border: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .button:hover {
-            background-color: var(--button-hover-bg);
-            transform: translateY(-2px);
-        }
-        .link-paragraph {
-            font-size: 14px;
-            line-height: 1.5;
-            color: var(--link-paragraph-color);
-            text-align: center;
-            margin: 0 0 15px 0;
-            transition: color 0.3s;
-        }
-        .link-url {
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--link-url-color);
-            text-align: center;
-            word-break: break-all;
-            direction: ltr;
-            padding: 0 10px;
-            transition: color 0.3s;
-        }
-        .footer {
-            padding: 25px 20px;
-            text-align: center;
-            background-color: var(--footer-bg);
-            border-top: 1px solid var(--content-border); /* Use content-border for consistency */
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        .footer-text {
-            font-size: 12px;
-            color: var(--footer-text);
-            margin: 0;
-            transition: color 0.3s;
-        }
-        .footer-text-secondary {
-            font-size: 12px;
-            color: var(--footer-text);
-            margin: 10px 0 0 0;
-            transition: color 0.3s;
         }
         .icon {
             font-size: 4rem;
-            color: var(--icon-color); 
+            color: var(--conf-icon-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
             transition: color 0.3s;
@@ -199,84 +73,72 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+        h1 { /* Targeting the h1 element directly as per user's HTML structure */
+            color: var(--conf-h1-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            transition: color 0.3s;
+        }
+        /* Targeting the p element directly for main paragraph */
+        .card > p { 
+            font-size: 1.1rem;
+            color: var(--conf-p-color);
+            line-height: 1.7;
+            margin-bottom: 30px;
+            transition: color 0.3s;
+        }
+        .button {
+            background-color: var(--conf-button-bg);
+            color: var(--conf-button-text);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+            border: none; /* Ensuring no default border interferes */
+        }
+        .button:hover {
+            background-color: var(--conf-button-hover-bg);
+            transform: translateY(-2px);
+        }
 
-        /* Responsive Styles */
+        /* Responsive Styles - Kept as is from user's code */
         @media screen and (max-width: 600px) {
-            .content {
-                padding: 25px 20px !important;
+            .card {
+                padding: 30px 20px;
             }
-            .h1-styled {
-                font-size: 1.5rem !important; /* Adjusted for better mobile view */
+            h1 {
+                font-size: 1.5rem !important;
             }
-            .paragraph {
-                font-size: 1rem !important; /* Adjusted for better mobile view */
+            .card > p { /* Specificity for the main paragraph */
+                font-size: 1rem !important;
             }
             .button {
                 padding: 12px 24px;
-                font-size: 0.9rem; /* Adjusted for better mobile view */
-            }
-            .logo {
-                width: 80px;
-                height: 80px;
-            }
-            .card {
-                padding: 30px 20px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container-wrapper">
-        <table role="presentation" class="card" width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td class="header">
-                    <img src="https://uzcrjhhvwgllsdsvftuj.supabase.co/storage/v1/object/public/drive/Flash.png" 
-                         alt="شعار فريق Flash" class="logo" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/007bff/FFFFFF?text=F&font=cairo'; this.alt='شعار فريق Flash الافتراضي';">
-                </td>
-            </tr>
-            <tr>
-                <td class="content">
-                    <div class="icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h1 class="h1-styled">تم تأكيد حسابك بنجاح!</h1>
-                    <p class="paragraph">
-                        أهلاً بك في مجتمع فريق Flash. يمكنك الآن تسجيل الدخول إلى حسابك والاستفادة من جميع ميزات المنصة.
-                    </p>
-                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td class="button-container">
-                                <a href="https://minal0p.github.io/Flash-Team/" class="button">
-                                    الانتقال إلى الصفحة الرئيسية
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                    <p class="link-paragraph">
-                        إذا واجهت مشكلة في الضغط على الزر، يمكنك نسخ ولصق الرابط التالي في متصفحك:
-                    </p>
-                    <p class="link-url" id="confirmation-link-text">
-                        <!-- سيتم ملء هذا الرابط بواسطة JavaScript إذا لزم الأمر -->
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td class="footer">
-                    <p class="footer-text">
-                        إذا لم تقم أنت بإنشاء هذا الحساب، يمكنك تجاهل هذه الرسالة بأمان.
-                    </p>
-                    <p class="footer-text-secondary">
-                        &copy; 2025 فريق Flash. جميع الحقوق محفوظة. </p>
-                </td>
-            </tr>
-        </table>
+    <div class="card">
+        <div class="icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>تم تأكيد حسابك بنجاح!</h1>
+        <p>
+            أهلاً بك في مجتمع فريق Flash. يمكنك الآن تسجيل الدخول إلى حسابك والاستفادة من جميع ميزات المنصة.
+        </p>
+        <a href="https://minal0p.github.io/Flash-Team/" class="button">
+            الانتقال إلى الصفحة الرئيسية
+        </a>
     </div>
 
     <script>
         function applyTheme() {
-            // This function mimics the theme application from the main app
-            // It assumes the main app sets 'theme' in localStorage
             const currentTheme = localStorage.getItem('theme');
             if (currentTheme === 'dark') {
                 document.documentElement.classList.add('dark');
@@ -286,30 +148,10 @@
         }
         applyTheme(); // Apply theme on load
 
-        // Attempt to get the confirmation URL from the hash if this page is loaded after Supabase redirect
-        // Supabase typically adds parameters like #access_token=...&refresh_token=...&expires_in=...&token_type=bearer&type=recovery or type=signup
-        // For email confirmation, it might just redirect without specific URL params visible to JS this way
-        // if it's a direct link from an email.
-        // The {{ .ConfirmationURL }} is for the email template itself.
-        // This script is for the page the user lands on *after* clicking the link.
-
-        // For demonstration, if the main app's URL was needed here, it would be static
-        const mainAppUrl = "https://minal0p.github.io/Flash-Team/"; 
-        const confirmationLinkTextElement = document.getElementById('confirmation-link-text');
-        
-        // If this page is meant to *be* the page linked from {{ .ConfirmationURL }},
-        // then there isn't a dynamic URL to display here in the same way.
-        // The user is *already* on the confirmation page.
-        // Displaying the main app URL as a fallback.
-        if (confirmationLinkTextElement) {
-             confirmationLinkTextElement.textContent = "يمكنك العودة إلى: " + mainAppUrl;
-        }
-
-
         // Optional: Redirect after a few seconds
         // setTimeout(() => {
-        //     window.location.href = mainAppUrl; 
-        // }, 7000); // 7 seconds
+        //     window.location.href = "https://minal0p.github.io/Flash-Team/"; // الرابط لموقعك الرئيسي
+        // }, 5000); // 5 ثوانٍ
     </script>
 </body>
 </html>
